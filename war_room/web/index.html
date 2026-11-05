@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FinLab 戰情室</title>
+<meta name="description" content="輸入一個事件，沿著供應鏈推出受影響的台股公司，再用真實股價與營收檢查推論對不對。">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="/"><b>FinLab</b><span>戰情室</span><em>實驗版</em></a>
+  <p class="bar-meta" id="meta"></p>
+</header>
+
+<main>
+  <section class="window hero">
+    <p class="eyebrow">供應鏈戰情室</p>
+    <h1>發生什麼事？</h1>
+    <div class="search">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m13.5 13.5 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="輸入事件、公司、原料或產業，例如：氦氣、長榮、荷姆茲">
+      <ul id="suggest" class="suggest" role="listbox" hidden></ul>
+    </div>
+    <div class="chips" id="events"></div>
+    <p class="ai-note" id="aiNote"></p>
+  </section>
+
+  <section class="summary" id="summary" hidden>
+    <div class="summary-head">
+      <div>
+        <h2 id="title"></h2>
+        <p class="aside" id="note"></p>
+      </div>
+      <div class="verify">
+        <div class="seg" role="group" aria-label="事件後多久" id="win"></div>
+        <label>用哪次事件驗證 <select id="verify"></select></label>
+      </div>
+    </div>
+    <div class="card tiles" id="tiles"></div>
+    <p class="foot" id="method"></p>
+  </section>
+
+  <section class="grid" id="grid" hidden>
+    <div class="card graph-card">
+      <div class="card-head">
+        <h2>傳導圖</h2>
+        <div class="seg" role="group" aria-label="往外擴散幾層" id="depth"></div>
+      </div>
+      <div id="cy" role="img" aria-label="事件沿供應鏈傳導到各產業與公司的關係圖"></div>
+      <p class="legend"><span class="lg ev"></span>事件 <span class="lg cm"></span>原物料 <span class="lg sg"></span>產業 <span class="lg up"></span>受惠 <span class="lg dn"></span>受害 <span class="lg nu"></span>方向未定</p>
+    </div>
+
+    <div class="card list-card">
+      <div class="card-head">
+        <h2>受影響的公司 <span class="count" id="count"></span></h2>
+        <div class="seg" role="group" aria-label="篩選" id="filter"></div>
+      </div>
+      <div class="list-cols"><span>公司與傳導路徑</span><span id="colA">一個月</span><span id="colB">至今</span></div>
+      <div id="list" class="list"></div>
+      <button class="more" id="more" hidden></button>
+    </div>
+  </section>
+
+  <section class="card detail" id="detail" hidden></section>
+
+  <section class="section how" id="how" hidden>
+    <div class="section-head"><h2>資料怎麼來</h2><p class="aside" id="speed"></p></div>
+    <div class="card steps" id="steps"></div>
+  </section>
+</main>
+
+<script src="/vendor/cytoscape.min.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+[project]
+name = "war-room"
+version = "0.1.0"
+description = "供應鏈戰情室：事件 → 供應鏈圖 → 受影響公司 → 實際股價與營收"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+# 桌機版只需要標準函式庫；自己有資料庫或要跑資料管線才裝這些
+data = ["chdb"]
+pipeline = ["chdb", "finlab", "pymupdf"]
+
+[project.scripts]
+war-room = "war_room.server:main"
+
+[build-system]
+requires = ["uv_build>=0.9,<0.14"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = ""
